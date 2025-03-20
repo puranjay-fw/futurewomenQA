@@ -1,6 +1,6 @@
 # futurewomenQA
 
-## Playwright Automation Project
+## Playwright Automation
 
 ## 🚀 How to Setup the Project
 
