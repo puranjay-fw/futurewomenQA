@@ -6,10 +6,14 @@ test('Login for the Diamond', async ({ page }) => {
   // Open the URL
   await page.goto('https://fwstaging-core.futurewomen.com/');
 
-    const signInLink = page.locator('a', { hasText: 'Sign In' });
+    const signInLink = page.locator('a', { hasText: 'Sign in' });
 
-    // Click on the Sign In link
-    await signInLink.click();
+    const visibleElement = signInLink.locator(':visible').first();
+
+    if (await visibleElement.isVisible()) {
+     // Now you can interact with the visible element, e.g., click it
+     await visibleElement.click();
+    }
 
     // Locate the input field inside a div (you can refine this with a more specific selector)
     const inputField = await page.locator('div input[type="email"]'); // Adjust the selector if needed
@@ -43,11 +47,16 @@ test('Login for the Red', async ({ page }) => {
     // Open the URL
     await page.goto('https://fwstaging-core.futurewomen.com/');
   
-      const signInLink = page.locator('a', { hasText: 'Sign In' });
-  
-      // Click on the Sign In link
-      await signInLink.click();
-  
+      const signInLink = page.locator('a', { hasText: 'Sign in' });
+      
+      const visibleElement = signInLink.locator(':visible').first();
+
+      if (await visibleElement.isVisible()) {
+        // Now you can interact with the visible element, e.g., click it
+        await visibleElement.click();
+      }
+      //await signInLink.click();
+
       // Locate the input field inside a div (you can refine this with a more specific selector)
       const inputField = await page.locator('div input[type="email"]'); // Adjust the selector if needed
   
@@ -80,10 +89,14 @@ test('Login for the Gold', async ({ page }) => {
     // Open the URL
     await page.goto('https://fwstaging-core.futurewomen.com/');
   
-      const signInLink = page.locator('a', { hasText: 'Sign In' });
-  
-      // Click on the Sign In link
-      await signInLink.click();
+      const signInLink = page.locator('a', { hasText: 'Sign in' });
+
+      const visibleElement = signInLink.locator(':visible').first();
+
+      if (await visibleElement.isVisible()) {
+       // Now you can interact with the visible element, e.g., click it
+      await visibleElement.click();
+      }
   
       // Locate the input field inside a div (you can refine this with a more specific selector)
       const inputField = await page.locator('div input[type="email"]'); // Adjust the selector if needed
