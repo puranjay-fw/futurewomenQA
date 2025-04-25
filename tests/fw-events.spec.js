@@ -53,3 +53,5 @@ test('Register a Diamond Course', async ({ page }) => {
   await page.locator('.event-button').first().click();
   
 });
+
+//new user auth Scenario
