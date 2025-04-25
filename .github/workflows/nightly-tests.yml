@@ -1,4 +1,4 @@
-name: Nightly Playwright Tests
+name: Nightly Test Run - FW
 on:
   schedule:
     - cron: '0 18 * * *'   # Runs daily at 6:00 PM IST (12:30 PM UTC)
