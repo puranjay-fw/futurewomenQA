@@ -127,8 +127,6 @@ test.describe('Navigation Scenarios', () => {
     test('Footer navigation Scenario - Instagram', async ({ page }) => {
         const page2Promise = page.waitForEvent('popup');
         await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').nth(1).click();
-        const page2 = await page2Promise;
-        await page2.getByRole('button', { name: 'Close' }).click();
       });
 
     test('Footer navigation Scenario - Linked In', async ({ page }) => {
