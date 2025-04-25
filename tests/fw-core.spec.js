@@ -2,10 +2,12 @@
 
 import { test, expect } from '@playwright/test';
 
-test('Login for the Diamond', async ({ page }) => {
-  // Open the URL
+test.beforeEach(async ({ page }) => {
+  // Runs before each test
   await page.goto('https://fwstaging-core.futurewomen.com/');
+});
 
+test('Login for the Diamond', async ({ page }) => {
     const signInLink = page.locator('a', { hasText: 'Sign in' });
 
     const visibleElement = signInLink.locator(':visible').first();
@@ -44,9 +46,6 @@ test('Login for the Diamond', async ({ page }) => {
 });
 
 test('Login for the Red', async ({ page }) => {
-    // Open the URL
-    await page.goto('https://fwstaging-core.futurewomen.com/');
-  
       const signInLink = page.locator('a', { hasText: 'Sign in' });
       
       const visibleElement = signInLink.locator(':visible').first();
@@ -80,15 +79,13 @@ test('Login for the Red', async ({ page }) => {
       await signInButton.click();
   
       await page.waitForTimeout(5000); // make script wait on the Diamond Home
-  
-      //await expect(page).toHaveTitle(/Diamond/);
+      //await expect(heading).toHaveText('WELCOME BACK', { timeout: 10000 });
+      //await expect(page).toHaveTitle("Women's Club For Personal And Professional Success - FW");
   
   });
 
 test('Login for the Gold', async ({ page }) => {
-    // Open the URL
-    await page.goto('https://fwstaging-core.futurewomen.com/');
-  
+
       const signInLink = page.locator('a', { hasText: 'Sign in' });
 
       const visibleElement = signInLink.locator(':visible').first();
@@ -128,9 +125,6 @@ test('Login for the Gold', async ({ page }) => {
 
 
 test('New Member Register', async ({ page }) => {
-    // Open the URL
-    await page.goto('https://fwstaging-core.futurewomen.com/');
-  
       const joinNowlink = page.locator('a', { hasText: 'Join Now' });
   
       await joinNowlink.click();
