@@ -117,4 +117,25 @@ test.describe('Navigation Scenarios', () => {
         await page1.getByRole('img', { name: 'Page 1 of 22, Future Women' }).click();
       });
 
+      test('Footer navigation Scenario - Facebook', async ({ page }) => {
+        const page1Promise = page.waitForEvent('popup');
+        await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').first().click();
+        const page1 = await page1Promise;
+        await page1.getByRole('button', { name: 'Close' }).click();
+      });
+
+    test('Footer navigation Scenario - Instagram', async ({ page }) => {
+        const page2Promise = page.waitForEvent('popup');
+        await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').nth(1).click();
+        const page2 = await page2Promise;
+        await page2.getByRole('button', { name: 'Close' }).click();
+      });
+
+    test('Footer navigation Scenario - Linked In', async ({ page }) => {
+        const page3Promise = page.waitForEvent('popup');
+        await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').nth(2).click();
+        const page3 = await page3Promise;
+        await page3.getByRole('button', { name: 'Dismiss' }).click();
+      });
+
 });

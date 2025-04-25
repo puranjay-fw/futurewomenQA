@@ -1,4 +1,4 @@
-/*import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test('Booking an Event for Red', async ({ page }) => {
   await page.goto('https://fwstaging-core.futurewomen.com/');
@@ -39,4 +39,4 @@ test('Register a Diamond Course', async ({ page }) => {
     dialog.dismiss().catch(() => {});
   });
   await page.locator('.event-button').first().click();
-});*/
+});
