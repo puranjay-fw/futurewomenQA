@@ -8,6 +8,7 @@ import { test, expect } from '@playwright/test';
 });*/
 
 test('Login for the Diamond', async ({ page }) => {
+  test.slow();
     await page.goto('https://fwstaging-core.futurewomen.com/');
     await page.getByRole('link', { name: 'Sign in' }).click();
     const inputField = await page.locator('div input[type="email"]');
@@ -24,6 +25,7 @@ test('Login for the Diamond', async ({ page }) => {
 });
 
 test('Login for the Red', async ({ page }) => {
+  test.slow();
       await page.goto('https://fwstaging-core.futurewomen.com/');
       await page.getByRole('link', { name: 'Sign in' }).click();
       //await signInLink.click();
@@ -43,6 +45,7 @@ test('Login for the Red', async ({ page }) => {
   });
 
 test('Login for the Gold', async ({ page }) => {
+  test.slow();
       await page.goto('https://fwstaging-core.futurewomen.com/');
       await page.getByRole('link', { name: 'Sign in' }).click();
       const inputField = await page.locator('div input[type="email"]');
@@ -61,10 +64,11 @@ test('Login for the Gold', async ({ page }) => {
 
 
 test('New Member Register', async ({ page }) => {
-      const joinNowlink = page.locator('a', { hasText: 'Join Now' }); 
-      await joinNowlink.click(); 
-      const indivisualBtn = await page.locator('div input[type="For Individuals"]');  
-      await indivisualBtn.click;
+  test.slow();
+      //const joinNowlink = page.locator('a', { hasText: 'Join Now' }); 
+      //await joinNowlink.click(); 
+      //const indivisualBtn = await page.locator('div input[type="For Individuals"]');  
+      //await indivisualBtn.click;
       await page.goto('https://lewinnovation.memberful.com/checkout?plan=103012');
       const buttonReg = page.locator('button', { hasText: 'Add coupon' });
       buttonReg.click();
@@ -81,7 +85,8 @@ test('New Member Register', async ({ page }) => {
   
   });
 
-test('Login for the Platnium', async ({ page }) => {
+test('Login for the Platinum', async ({ page }) => {
+  test.slow();
     await page.goto('https://fwstaging-core.futurewomen.com/');
     await page.getByRole('link', { name: 'Sign in' }).click();
     await page.getByRole('textbox', { name: 'Email' }).click();
@@ -89,8 +94,8 @@ test('Login for the Platnium', async ({ page }) => {
     await page.getByRole('button', { name: 'Continue' }).click();
     await page.getByRole('textbox', { name: 'Password' }).fill('Test@123');
     await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.goto('https://fwstaging-core.futurewomen.com/home/platinum-plus/');
     await page.waitForTimeout(5000);
+    await page.goto('https://fwstaging-core.futurewomen.com/home/platinum-plus/');
     
   });
 

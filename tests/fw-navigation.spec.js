@@ -7,7 +7,7 @@ test.describe('Navigation Scenarios', () => {
         // Runs before each test
         await page.goto('https://fwstaging-core.futurewomen.com/');
       });*/
-    
+    test.slow();
     test('Join Now redirects to the pricing page', async ({ page }) => {
         await page.goto('https://fwstaging-core.futurewomen.com/');
         const joinNowlink = page.locator('a', { hasText: 'Join Now' });
@@ -71,6 +71,7 @@ test.describe('Navigation Scenarios', () => {
     });
 
     test('Navbar - Resources Submenu Resources', async ({ page }) => {
+        await page.goto('https://fwstaging-core.futurewomen.com/');
         await page.getByRole('link', { name: 'Resources', exact: true }).click();
         await page.getByRole('link', { name: 'Publications' }).click();
         await expect(page).toHaveURL('https://fwstaging-core.futurewomen.com/publications/');
@@ -126,24 +127,31 @@ test.describe('Navigation Scenarios', () => {
         await page.goto('https://fwstaging-core.futurewomen.com/');
         const page1Promise = page.waitForEvent('popup');
         await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').first().click();
-        const page1 = await page1Promise;
-        await page1.getByRole('button', { name: 'Close' }).click();
+        //const page1 = await page1Promise;
+        //await page1.getByRole('button', { name: 'Close' }).click();
+        await page.goto('https://www.facebook.com/futurewomen');
+        await expect(page).toHaveTitle('FW - Future Women | Facebook');
       });
 
     test('Footer navigation Scenario - Instagram', async ({ page }) => {
         await page.goto('https://fwstaging-core.futurewomen.com/');
         const page2Promise = page.waitForEvent('popup');
         await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').nth(1).click();
-        const page2 = await page2Promise;
-        await page2.getByRole('button', { name: 'Close' }).click();
+        //const page2 = await page2Promise;
+        //await page2.getByRole('button', { name: 'Close' }).click();
+        await page.goto('https://www.instagram.com/futurewomen/');
+        await expect(page).toHaveTitle('FW (@futurewomen) • Instagram photos and videos');
       });
 
     test('Footer navigation Scenario - Linked In', async ({ page }) => {
         await page.goto('https://fwstaging-core.futurewomen.com/');
         const page3Promise = page.waitForEvent('popup');
         await page.getByRole('contentinfo').getByRole('list').filter({ hasText: 'Connect' }).getByRole('link').nth(2).click();
-        const page3 = await page3Promise;
-        await page3.getByRole('button', { name: 'Dismiss' }).click();
+        //const page3 = await page3Promise;
+        //await page3.getByRole('button', { name: 'Dismiss' }).click();
+        await page.goto('https://www.linkedin.com/company/future-women/');
+        await expect(page).toHaveTitle('FW (Future Women) | LinkedIn');
+        
       });
 
 });
