@@ -25,7 +25,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout: 60000, // Sets the timeout to 60 seconds for each test
+  //timeout: 60000, // Sets the timeout to 60 seconds for each test
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     //baseURL: 'https://fwstaging-core.futurewomen.com/',

@@ -7,3 +7,4 @@ node_modules/
 /playwright/.cache/
 tests/example.spec.js
 tests-examples/demo-todo-app.spec.js
+tests/fw-diamond.spec.js
