@@ -2,17 +2,15 @@
 
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
+/*test.beforeEach(async ({ page }) => {
   // Runs before each test
   await page.goto('https://fwstaging-core.futurewomen.com/');
-});
+});*/
 
 test('Login for the Diamond', async ({ page }) => {
-    const signInLink = page.locator('a', { hasText: 'Sign in' });
-    const visibleElement = signInLink.locator(':visible').first();
-    if (await visibleElement.isVisible()) {
-     await visibleElement.click();
-    }
+  test.slow();
+    await page.goto('https://fwstaging-core.futurewomen.com/');
+    await page.getByRole('link', { name: 'Sign in' }).click();
     const inputField = await page.locator('div input[type="email"]');
     await inputField.fill('diamond.ns@yopmail.com');
     await expect(inputField).toHaveValue('diamond.ns@yopmail.com');
@@ -27,11 +25,9 @@ test('Login for the Diamond', async ({ page }) => {
 });
 
 test('Login for the Red', async ({ page }) => {
-      const signInLink = page.locator('a', { hasText: 'Sign in' });
-      const visibleElement = signInLink.locator(':visible').first();
-      if (await visibleElement.isVisible()) {
-        await visibleElement.click();
-      }
+  test.slow();
+      await page.goto('https://fwstaging-core.futurewomen.com/');
+      await page.getByRole('link', { name: 'Sign in' }).click();
       //await signInLink.click();
       const inputField = await page.locator('div input[type="email"]');
       await inputField.fill('red.ns@yopmail.com');
@@ -49,11 +45,9 @@ test('Login for the Red', async ({ page }) => {
   });
 
 test('Login for the Gold', async ({ page }) => {
-      const signInLink = page.locator('a', { hasText: 'Sign in' });
-      const visibleElement = signInLink.locator(':visible').first();
-      if (await visibleElement.isVisible()) {
-      await visibleElement.click();
-      }
+  test.slow();
+      await page.goto('https://fwstaging-core.futurewomen.com/');
+      await page.getByRole('link', { name: 'Sign in' }).click();
       const inputField = await page.locator('div input[type="email"]');
       await inputField.fill('gold.ns@yopmail.com');
       await expect(inputField).toHaveValue('gold.ns@yopmail.com'); 
@@ -70,10 +64,11 @@ test('Login for the Gold', async ({ page }) => {
 
 
 test('New Member Register', async ({ page }) => {
-      const joinNowlink = page.locator('a', { hasText: 'Join Now' }); 
-      await joinNowlink.click(); 
-      const indivisualBtn = await page.locator('div input[type="For Individuals"]');  
-      await indivisualBtn.click;
+  test.slow();
+      //const joinNowlink = page.locator('a', { hasText: 'Join Now' }); 
+      //await joinNowlink.click(); 
+      //const indivisualBtn = await page.locator('div input[type="For Individuals"]');  
+      //await indivisualBtn.click;
       await page.goto('https://lewinnovation.memberful.com/checkout?plan=103012');
       const buttonReg = page.locator('button', { hasText: 'Add coupon' });
       buttonReg.click();
@@ -88,6 +83,20 @@ test('New Member Register', async ({ page }) => {
       const orderButton = page.locator('button', { hasText: 'Place your order' });
       await orderButton.click();
   
+  });
+
+test('Login for the Platinum', async ({ page }) => {
+  test.slow();
+    await page.goto('https://fwstaging-core.futurewomen.com/');
+    await page.getByRole('link', { name: 'Sign in' }).click();
+    await page.getByRole('textbox', { name: 'Email' }).click();
+    await page.getByRole('textbox', { name: 'Email' }).fill('platinum.n1@yopmail.com');
+    await page.getByRole('button', { name: 'Continue' }).click();
+    await page.getByRole('textbox', { name: 'Password' }).fill('Test@123');
+    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+    await page.waitForTimeout(5000);
+    await page.goto('https://fwstaging-core.futurewomen.com/home/platinum-plus/');
+    
   });
 
 
