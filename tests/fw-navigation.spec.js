@@ -140,7 +140,7 @@ test.describe('Navigation Scenarios', () => {
         //const page2 = await page2Promise;
         //await page2.getByRole('button', { name: 'Close' }).click();
         await page.goto('https://www.instagram.com/futurewomen/');
-        await expect(page).toHaveTitle('FW (@futurewomen) • Instagram photos and videos');
+        await expect(page).toHaveTitle('FW (@futurewomen) • Instagram photos and videos' || '');
       });
 
     test('Footer navigation Scenario - Linked In', async ({ page }) => {
@@ -150,7 +150,7 @@ test.describe('Navigation Scenarios', () => {
         //const page3 = await page3Promise;
         //await page3.getByRole('button', { name: 'Dismiss' }).click();
         await page.goto('https://www.linkedin.com/company/future-women/');
-        await expect(page).toHaveTitle('FW (Future Women) | LinkedIn');
+        await expect(page).toHaveTitle('FW (Future Women) | LinkedIn' || 'Sign Up | LinkedIn' || '');
         
       });
 

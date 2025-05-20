@@ -8,3 +8,4 @@ node_modules/
 tests/example.spec.js
 tests-examples/demo-todo-app.spec.js
 tests/fw-diamond.spec.js
+tests/ja-core.spec.js
