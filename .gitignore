@@ -9,3 +9,6 @@ tests/example.spec.js
 tests-examples/demo-todo-app.spec.js
 tests/fw-diamond.spec.js
 tests/ja-core.spec.js
+tests/fw-core.spec.js
+tests/fw-events.spec.js
+tests/fw-navigation.spec.js
