@@ -5,9 +5,14 @@ import { defineConfig, devices } from '@playwright/test';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+ import dotenv from 'dotenv';
+ import path from 'path';
+
+ const ENV = process.env.TEST_ENV || 'stag';
+ const envFilePath = path.resolve(__dirname, `./env/.env.${ENV}`);
+ //dotenv.config({ path: './env/.env.${ENV}' });
+ dotenv.config({ path: envFilePath });
+
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -23,13 +28,15 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 4 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['allure-playwright','html'],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   //timeout: 60000, // Sets the timeout to 60 seconds for each test
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     //baseURL: 'https://fwstaging-core.futurewomen.com/',
-
+    baseURL: process.env.BASE_URL,
     // Capture screenshot after each test failure.
     screenshot: 'only-on-failure',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

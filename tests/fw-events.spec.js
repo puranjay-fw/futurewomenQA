@@ -1,164 +1,84 @@
 import { test, expect } from '@playwright/test';
 
-
-//Staging
-test('Booking an Event for Red', async ({ page }) => {
+test('Booking an Event for Red/Godl/Plat', async ({ page }) => {
   test.slow();
-  await page.goto('https://fwstaging-core.futurewomen.com/');
-  const signInLink = page.locator('a', { hasText: 'Sign in' });
+
+  // Navigate to the base URL
+  await page.goto(process.env.BASE_URL);
+
+  // Click on 'Sign in'
   await page.getByRole('link', { name: 'Sign in' }).click();
-  const inputField = await page.locator('div input[type="email"]');
-  await inputField.fill('red.ns@yopmail.com');
-  await expect(inputField).toHaveValue('red.ns@yopmail.com');
-  const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-  await continueButton.click();
-  const inputPassword = await page.locator('div input[type="Password"]');
-  await inputPassword.fill('Test@123');
-  const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-  await signInButton.click();
+
+  // Fill in the email
+  const emailInput = page.locator('div input[type="email"]');
+  await emailInput.fill(process.env.RED_EMAIL);
+  await expect(emailInput).toHaveValue(process.env.RED_EMAIL);
+
+  // Click on 'Continue'
+  await page.locator('input[type="submit"][value="Continue"]').click();
+
+  // Fill in the password
+  await page.locator('div input[type="Password"]').fill(process.env.RED_PASSWORD);
+
+  // Click on 'Sign in'
+  await page.locator('input[type="submit"][value="Sign in"]').click();
+
+  // Wait for navigation to complete
   await page.waitForTimeout(5000);
-  await page.goto('https://fwstaging-core.futurewomen.com/home/welcome-red/');
+
+  // Navigate to the welcome page
+  await page.goto(`${process.env.BASE_URL}/home/welcome-red/`);
+
+  // Click on 'YOUR EVENTS'
   await page.getByRole('link', { name: 'YOUR EVENTS' }).click();
-  await page.goto('https://fwstaging-community.futurewomen.com/events/red-member-events/');
+
+  // Navigate to the events page
+  await page.goto(`${process.env.COMMUNITY_URL}/events/red-member-events/`);
+
+  // Click on the specific event
   await page.locator('a').filter({ hasText: 'PS - Test Automation Event' }).click();
+
+  // Book the event
   await page.getByRole('button', { name: 'Book now Free' }).click();
   await page.getByRole('button', { name: '' }).click();
   await page.getByRole('button', { name: 'Continue' }).click();
-  await page.locator('div').filter({ hasText: /^Confirm$/ }).locator('span').click();
-  await page.locator('#am-add-to-calendar div').filter({ hasText: 'Add to Calendar' }).click();
-  await page.getByText('Finish').click();
 
+  // Confirm the booking
+  await page.locator('div').filter({ hasText: /^Confirm$/ }).locator('span').click();
+
+  // Add to calendar
+  await page.locator('#am-add-to-calendar div').filter({ hasText: 'Add to Calendar' }).click();
+
+  // Finish the process
+  await page.getByText('Finish').click();
 });
+
 
 test('Register a Diamond Course', async ({ page }) => {
   test.slow();
-  await page.goto('https://fwstaging-core.futurewomen.com/');
+
+  // Navigate to the base URL
+  await page.goto(process.env.BASE_URL);
+
+  // Sign in
   await page.getByRole('link', { name: 'Sign in' }).click();
-  const inputField = await page.locator('div input[type="email"]');
-  await inputField.fill('diamond.ns@yopmail.com');
-  await expect(inputField).toHaveValue('diamond.ns@yopmail.com');
-  const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-  await continueButton.click();
-  const inputPassword = await page.locator('div input[type="Password"]');
-  await inputPassword.fill('Test@123');
-  const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-  await signInButton.click();
+  await page.locator('div input[type="email"]').fill(process.env.DIAMOND_EMAIL);
+  await page.locator('input[type="submit"][value="Continue"]').click();
+  await page.locator('div input[type="Password"]').fill(process.env.DIAMOND_PASSWORD);
+  await page.locator('input[type="submit"][value="Sign in"]').click();
+
+  // Wait for navigation to complete
   await page.waitForTimeout(5000);
-  await page.goto('https://fwstaging-core.futurewomen.com/home/welcome-diamond/');
+
+  // Navigate to the welcome page
+  await page.goto(`${process.env.BASE_URL}/home/welcome-diamond/`);
+
+  // Handle potential dialog
   page.once('dialog', dialog => {
     console.log(`Dialog message: ${dialog.message()}`);
     dialog.dismiss().catch(() => {});
   });
+
+  // Register for the course
   await page.locator('.event-button').first().click();
-  
 });
-
-//new user auth Scenario
-test('Booking an Event for Platimun+', async ({ page }) => {
-  test.slow();
-  await page.goto('https://fwstaging-core.futurewomen.com/');
-  const signInLink = page.locator('a', { hasText: 'Sign in' });
-  await page.getByRole('link', { name: 'Sign in' }).click();
-  const inputField = await page.locator('div input[type="email"]');
-  await inputField.fill('platinum.n1@yopmail.com');
-  await expect(inputField).toHaveValue('platinum.n1@yopmail.com');
-  const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-  await continueButton.click();
-  const inputPassword = await page.locator('div input[type="Password"]');
-  await inputPassword.fill('Test@123');
-  const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-  await signInButton.click();
-  await page.waitForTimeout(5000);
-  await page.goto('https://fwstaging-core.futurewomen.com/home/welcome-red/');
-  await page.getByRole('link', { name: 'YOUR EVENTS' }).click();
-  await page.goto('https://fwstaging-core.futurewomen.com/home/platinum-plus/');
-  await page.locator('a').filter({ hasText: 'PS - Test Automation Event' }).click();
-  await page.getByRole('button', { name: 'Book now Free' }).click();
-  await page.getByRole('button', { name: '' }).click();
-  await page.getByRole('button', { name: 'Continue' }).click();
-  await page.locator('div').filter({ hasText: /^Confirm$/ }).locator('span').click();
-  await page.locator('#am-add-to-calendar div').filter({ hasText: 'Add to Calendar' }).click();
-  await page.getByText('Finish').click();
-  
-});
-
-/*
-//PROD
-test('Register a Diamond Course', async ({ page }) => {
-  test.slow();
-  await page.goto('https://www.futurewomen.com/');
-  await page.getByRole('link', { name: 'Sign in' }).click();
-  const inputField = await page.locator('div input[type="email"]');
-  await inputField.fill('uservivekdhiman@gmail.com');
-  await expect(inputField).toHaveValue('uservivekdhiman@gmail.com');
-  const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-  await continueButton.click();
-  const inputPassword = await page.locator('div input[type="Password"]');
-  await inputPassword.fill('Test@123');
-  const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-  await signInButton.click();
-  await page.waitForTimeout(5000);
-  await page.goto('https://futurewomen.com/home/welcome-diamond/');
-  page.once('dialog', dialog => {
-    console.log(`Dialog message: ${dialog.message()}`);
-    dialog.dismiss().catch(() => {});
-  });
-  await page.locator('.event-button').first().click();
-  
-});
-
-test('Booking an Event for Platimun+', async ({ page }) => {
-  test.slow();
-  await page.goto('https://futurewomen.com/');
-  const signInLink = page.locator('a', { hasText: 'Sign in' });
-  await page.getByRole('link', { name: 'Sign in' }).click();
-  const inputField = await page.locator('div input[type="email"]');
-  await inputField.fill('test.platinum.prod@yopmail.com');
-  await expect(inputField).toHaveValue('test.platinum.prod@yopmail.com');
-  const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-  await continueButton.click();
-  const inputPassword = await page.locator('div input[type="Password"]');
-  await inputPassword.fill('Test@123');
-  const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-  await signInButton.click();
-  await page.waitForTimeout(5000);
-  await page.goto('https://futurewomen.com/home/welcome-red/');
-  await page.getByRole('link', { name: 'YOUR EVENTS' }).click();
-  await page.goto('https://futurewomen.com/home/platinum-plus/');
-  await page.locator('a').filter({ hasText: 'PS - Test Automation Event' }).click();
-  await page.getByRole('button', { name: 'Book now Free' }).click();
-  await page.getByRole('button', { name: '' }).click();
-  await page.getByRole('button', { name: 'Continue' }).click();
-  await page.locator('div').filter({ hasText: /^Confirm$/ }).locator('span').click();
-  await page.locator('#am-add-to-calendar div').filter({ hasText: 'Add to Calendar' }).click();
-  await page.getByText('Finish').click();
-  
-});
-
-test('Booking an Event for Red', async ({ page }) => {
-  test.slow();
-  await page.goto('https://futurewomen.com/');
-  const signInLink = page.locator('a', { hasText: 'Sign in' });
-  await page.getByRole('link', { name: 'Sign in' }).click();
-  const inputField = await page.locator('div input[type="email"]');
-  await inputField.fill('test.red.prod@yopmail.com');
-  await expect(inputField).toHaveValue('test.red.prod@yopmail.com');
-  const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-  await continueButton.click();
-  const inputPassword = await page.locator('div input[type="Password"]');
-  await inputPassword.fill('Test@123');
-  const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-  await signInButton.click();
-  await page.waitForTimeout(5000);
-  await page.goto('https://futurewomen.com/home/welcome-red/');
-  await page.getByRole('link', { name: 'YOUR EVENTS' }).click();
-  await page.goto('https://futurewomen.com/events/red-member-events/');
-  await page.locator('a').filter({ hasText: 'PS - Test Automation Event' }).click();
-  await page.getByRole('button', { name: 'Book now Free' }).click();
-  await page.getByRole('button', { name: '' }).click();
-  await page.getByRole('button', { name: 'Continue' }).click();
-  await page.locator('div').filter({ hasText: /^Confirm$/ }).locator('span').click();
-  await page.locator('#am-add-to-calendar div').filter({ hasText: 'Add to Calendar' }).click();
-  await page.getByText('Finish').click();
-
-});*/

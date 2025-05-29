@@ -1,199 +1,84 @@
 // login & Sign Up Scenarios
 
 import { test, expect } from '@playwright/test';
+//env variables
 
-/*test.beforeEach(async ({ page }) => {
-  // Runs before each test
-  await page.goto('https://fwstaging-core.futurewomen.com/');
-});*/
-
-//STAGING 
-/*
-test('Login for the Diamond', async ({ page }) => {
-  test.slow();
-    await page.goto('https://fwstaging-core.futurewomen.com/');
-    await page.getByRole('link', { name: 'Sign in' }).click();
-    const inputField = await page.locator('div input[type="email"]');
-    await inputField.fill('diamond.ns@yopmail.com');
-    await expect(inputField).toHaveValue('diamond.ns@yopmail.com');
-    const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-    await continueButton.click();
-    const inputPassword = await page.locator('div input[type="Password"]');
-    await inputPassword.fill('Test@123');
-    const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-    await signInButton.click();
-    await page.waitForTimeout(5000);
-
-});
-
-test('Login for the Red', async ({ page }) => {
-  test.slow();
-      await page.goto('https://fwstaging-core.futurewomen.com/');
+    test('Login for the Red', async ({ page }) => {
+      test.slow();
+      await page.goto(process.env.BASE_URL);
       await page.getByRole('link', { name: 'Sign in' }).click();
-      //await signInLink.click();
-      const inputField = await page.locator('div input[type="email"]');
-      await inputField.fill('red.ns@yopmail.com');
-      await expect(inputField).toHaveValue('red.ns@yopmail.com');
-      const continueButton = await page.locator('input[type="submit"][value="Continue"]');  
-      await continueButton.click(); 
-      const inputPassword = await page.locator('div input[type="Password"]');
-      await inputPassword.fill('Test@123');
-      const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
+      const inputField = page.locator('div input[type="email"]');
+      await inputField.fill(process.env.RED_EMAIL);
+      await expect(inputField).toHaveValue(process.env.RED_EMAIL);
+      const continueButton = page.locator('input[type="submit"][value="Continue"]');
+      await continueButton.click();
+      const inputPassword = page.locator('div input[type="Password"]');
+      await inputPassword.fill(process.env.RED_PASSWORD);
+      const signInButton = page.locator('input[type="submit"][value="Sign in"]');
       await signInButton.click();
       await page.waitForTimeout(5000);
-      //await expect(heading).toHaveText('WELCOME BACK', { timeout: 10000 });
-      //await expect(page).toHaveTitle("Women's Club For Personal And Professional Success - FW");
-  
-  });
-
-test('Login for the Gold', async ({ page }) => {
-  test.slow();
-      await page.goto('https://fwstaging-core.futurewomen.com/');
-      await page.getByRole('link', { name: 'Sign in' }).click();
-      const inputField = await page.locator('div input[type="email"]');
-      await inputField.fill('gold.ns@yopmail.com');
-      await expect(inputField).toHaveValue('gold.ns@yopmail.com'); 
-      const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-      await continueButton.click();
-      const inputPassword = await page.locator('div input[type="Password"]');
-      await inputPassword.fill('Test@123'); 
-      const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-      await signInButton.click(); 
-      await page.waitForTimeout(5000);
-      //await expect(page).toHaveTitle(/Diamond/);
-  
-  });
-
-
-test('New Member Register', async ({ page }) => {
-  test.slow();
-      //const joinNowlink = page.locator('a', { hasText: 'Join Now' }); 
-      //await joinNowlink.click(); 
-      //const indivisualBtn = await page.locator('div input[type="For Individuals"]');  
-      //await indivisualBtn.click;
-      await page.goto('https://lewinnovation.memberful.com/checkout?plan=103012');
-      const buttonReg = page.locator('button', { hasText: 'Add coupon' });
-      buttonReg.click();
-      const inputCupon = page.locator('input[aria-label="Coupon code"]');
-      await inputCupon.fill('DEVTEST1234');
-      const applyButton = page.locator('button', { hasText: 'Apply' });      
-      applyButton.click();
-      const fullName = page.locator('input[name="checkout[full_name]"]');
-      await fullName.fill('Puranjay');
-      const email = page.locator('input[placeholder="Email address"]');
-      await email.fill('puranjay@gmail.com');
-      const orderButton = page.locator('button', { hasText: 'Place your order' });
-      await orderButton.click();
-  
-  });
-
-test('Login for the Platinum', async ({ page }) => {
-  test.slow();
-    await page.goto('https://fwstaging-core.futurewomen.com/');
-    await page.getByRole('link', { name: 'Sign in' }).click();
-    await page.getByRole('textbox', { name: 'Email' }).click();
-    await page.getByRole('textbox', { name: 'Email' }).fill('platinum.n1@yopmail.com');
-    await page.getByRole('button', { name: 'Continue' }).click();
-    await page.getByRole('textbox', { name: 'Password' }).fill('Test@123');
-    await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-    await page.waitForTimeout(5000);
-    await page.goto('https://fwstaging-core.futurewomen.com/home/platinum-plus/');
+    });
     
-  });
-
-*/
-  //PROD
-
-  test('Login for the Diamond', async ({ page }) => {
-    test.slow();
-      await page.goto('https://www.futurewomen.com/');
+    test('Login for the Gold', async ({ page }) => {
+      test.slow();
+      await page.goto(process.env.BASE_URL);
       await page.getByRole('link', { name: 'Sign in' }).click();
-      const inputField = await page.locator('div input[type="email"]');
-      await inputField.fill('test.diamond.prod@yopmail.com');
-      await expect(inputField).toHaveValue('test.diamond.prod@yopmail.com');
-      const continueButton = await page.locator('input[type="submit"][value="Continue"]');
+      const inputField = page.locator('div input[type="email"]');
+      await inputField.fill(process.env.GOLD_EMAIL);
+      await expect(inputField).toHaveValue(process.env.GOLD_EMAIL);
+      const continueButton = page.locator('input[type="submit"][value="Continue"]');
       await continueButton.click();
-      const inputPassword = await page.locator('div input[type="Password"]');
-      await inputPassword.fill('Test@123');
-      const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
+      const inputPassword = page.locator('div input[type="Password"]');
+      await inputPassword.fill(process.env.GOLD_PASSWORD);
+      const signInButton = page.locator('input[type="submit"][value="Sign in"]');
       await signInButton.click();
       await page.waitForTimeout(5000);
-  
-  });
-  
-  test('Login for the Red', async ({ page }) => {
-    test.slow();
-        await page.goto('https://www.futurewomen.com/');
-        await page.getByRole('link', { name: 'Sign in' }).click();
-        //await signInLink.click();
-        const inputField = await page.locator('div input[type="email"]');
-        await inputField.fill('test.red.prod@yopmail.com');
-        await expect(inputField).toHaveValue('test.red.prod@yopmail.com');
-        const continueButton = await page.locator('input[type="submit"][value="Continue"]');  
-        await continueButton.click(); 
-        const inputPassword = await page.locator('div input[type="Password"]');
-        await inputPassword.fill('Test@123');
-        const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-        await signInButton.click();
-        await page.waitForTimeout(5000);
-        //await expect(heading).toHaveText('WELCOME BACK', { timeout: 10000 });
-        //await expect(page).toHaveTitle("Women's Club For Personal And Professional Success - FW");
-    
     });
-  
-  test('Login for the Gold', async ({ page }) => {
-    test.slow();
-        await page.goto('https://www.futurewomen.com/');
-        await page.getByRole('link', { name: 'Sign in' }).click();
-        const inputField = await page.locator('div input[type="email"]');
-        await inputField.fill('test.gold.prod@yopmail.com');
-        await expect(inputField).toHaveValue('test.gold.prod@yopmail.com'); 
-        const continueButton = await page.locator('input[type="submit"][value="Continue"]');
-        await continueButton.click();
-        const inputPassword = await page.locator('div input[type="Password"]');
-        await inputPassword.fill('Test@123'); 
-        const signInButton = await page.locator('input[type="submit"][value="Sign in"]');
-        await signInButton.click(); 
-        await page.waitForTimeout(5000);
-        //await expect(page).toHaveTitle(/Diamond/);
-    
+
+    test('Login for the Diamond', async ({ page }) => {
+      test.slow();
+      await page.goto(process.env.BASE_URL);
+      await page.getByRole('link', { name: 'Sign in' }).click();
+      const inputField = page.locator('div input[type="email"]');
+      await inputField.fill(process.env.DIAMOND_EMAIL);
+      await expect(inputField).toHaveValue(process.env.DIAMOND_EMAIL);
+      const continueButton = page.locator('input[type="submit"][value="Continue"]');
+      await continueButton.click();
+      const inputPassword = page.locator('div input[type="Password"]');
+      await inputPassword.fill(process.env.DIAMOND_PASSWORD);
+      const signInButton = page.locator('input[type="submit"][value="Sign in"]');
+      await signInButton.click();
+      await page.waitForTimeout(5000);
     });
-  
-  
-  test('New Member Register', async ({ page }) => {
-    test.slow();
-        //const joinNowlink = page.locator('a', { hasText: 'Join Now' }); 
-        //await joinNowlink.click(); 
-        //const indivisualBtn = await page.locator('div input[type="For Individuals"]');  
-        //await indivisualBtn.click;
-        await page.goto('https://lewinnovation.memberful.com/checkout?plan=103012');
-        const buttonReg = page.locator('button', { hasText: 'Add coupon' });
-        buttonReg.click();
-        const inputCupon = page.locator('input[aria-label="Coupon code"]');
-        await inputCupon.fill('DEVTEST1234');
-        const applyButton = page.locator('button', { hasText: 'Apply' });      
-        applyButton.click();
-        const fullName = page.locator('input[name="checkout[full_name]"]');
-        await fullName.fill('Puranjay');
-        const email = page.locator('input[placeholder="Email address"]');
-        await email.fill('qa.test@gmail.com');
-        const orderButton = page.locator('button', { hasText: 'Place your order' });
-        await orderButton.click();
-    
-    });
-  
-  test('Login for the Platinum', async ({ page }) => {
-    test.slow();
-      await page.goto('https://www.futurewomen.com/');
+
+    test('Login for the Platinum', async ({ page }) => {
+      test.slow();
+      await page.goto(process.env.BASE_URL);
       await page.getByRole('link', { name: 'Sign in' }).click();
       await page.getByRole('textbox', { name: 'Email' }).click();
-      await page.getByRole('textbox', { name: 'Email' }).fill('test.platinum.prod@yopmail.com');
+      await page.getByRole('textbox', { name: 'Email' }).fill(process.env.PLATINUM_EMAIL);
       await page.getByRole('button', { name: 'Continue' }).click();
-      await page.getByRole('textbox', { name: 'Password' }).fill('Test@123');
+      await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PLATINUM_PASSWORD);
       await page.getByRole('button', { name: 'Sign in', exact: true }).click();
       await page.waitForTimeout(5000);
-      await page.goto('https://www.futurewomen.com/home/platinum-plus/');
-      
+      await page.goto(`${process.env.BASE_URL}/home/platinum-plus/`);
     });
+
+    test('New Member - Register', async ({ page }) => {
+      await page.goto(process.env.BASE_URL);
+      await page.getByRole('link', { name: 'Join now' }).click();
+      await page.getByRole('link', { name: 'Become a member' }).click();
+      await page.getByRole('link', { name: 'For individuals' }).click();
+      await page.getByRole('link', { name: 'Join Yearly - $48 /yr' }).click();
+      await page.getByRole('textbox', { name: 'Full name' }).fill(process.env.REGISTER_NAME);
+      await page.getByRole('textbox', { name: 'Email address' }).click();
+      await page.getByRole('textbox', { name: 'Email address' }).fill(process.env.REGISTER_EMAIL);
+      await page.getByRole('button', { name: 'Add coupon' }).click();
+      await page.getByRole('textbox', { name: 'Coupon code' }).fill(process.env.COUPON_CODE);
+      await page.getByRole('button', { name: 'Apply' }).click();
+      await page.getByRole('button', { name: 'Place your order' }).click();
+      await page.goto(`${process.env.BASE_URL}${process.env.POST_PURCHASE_PATH}`);
+      });
+  
 
 
